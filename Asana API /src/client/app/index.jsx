@@ -7,9 +7,11 @@ class App extends React.Component {
     return (
       <div>
         <div className="top-screen">
-          
+          <p>Asana API Coding Challenge</p>
         </div>
-        <p>Hello</p>
+        <div>
+          <p>To begin, enter your your project ID in the input form. Click the Enter button to see a list of your tasks!</p>
+        </div>
         <Form />
       </div>
     )
