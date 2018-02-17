@@ -5,7 +5,7 @@ class Form extends React.Component {
     return (
       <div>
         <div>
-          <input placeholder="Type in your workspace id"></input>
+          <input placeholder="Type in your project id"></input>
           <button>Enter</button>
         </div>
       </div>
