@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 }};
 
 const mapDispatchToProps = dispatch => ({
-  getTasks: (project_id) => dispatch(getTasks(project_id))
+  getTasks: (project_id, asana_token) => dispatch(getTasks(project_id, asana_token))
 });
 
 export default connect(

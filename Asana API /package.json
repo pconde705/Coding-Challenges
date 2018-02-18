@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "redux-logger": "^3.0.6",
     "webpack": "^3.11.0"
   },
   "dependencies": {

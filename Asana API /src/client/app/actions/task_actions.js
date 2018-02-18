@@ -14,10 +14,16 @@ const receiveErrors = errors => ({
   errors
 });
 
-export const getTasks = project_id => dispatch => (
-  axios.get(`${PROJECTS}/${project_id}/tasks`).then(
-    response => dispatch(receiveTasks(response.data))
+export const getTasks = (project_id, asana_token) => dispatch => (
+  axios.get(`${PROJECTS}/${project_id}/tasks?access_token=${asana_token}`).then(
+    response => {
+      // console.log(response);
+      dispatch(receiveTasks(response.data))
+    }
   ).catch(
-    error => dispatch(receiveErrors(error.response.data))
+    error => {
+      // console.log(project_id);
+      dispatch(receiveErrors(error.response.data))
+    }
   )
 )
