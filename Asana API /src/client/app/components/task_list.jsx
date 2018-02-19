@@ -19,8 +19,10 @@ class TaskList extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.getTasks(this.state["project_id"], this.state["asana_token"])
+    this.props.getProject(this.state["project_id"], this.state["asana_token"]);
+    this.props.getTasks(this.state["project_id"], this.state["asana_token"]);
   }
+
 
   render () {
     return (
@@ -34,7 +36,7 @@ class TaskList extends React.Component {
           onChange={this.handleInput('project_id')}
           placeholder="e.g. 931581952334457"></input>
         <button className="form-button" onClick={this.handleSubmit}>Get Tasks</button>
-        <TaskListItem results={this.props.tasks} project={this.state["project_id"]}/>
+        <TaskListItem results={this.props.tasks} project={this.state["project_id"]} title={this.props.project}/>
       </div>
     )
   }

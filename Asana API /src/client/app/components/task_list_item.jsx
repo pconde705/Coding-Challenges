@@ -19,6 +19,7 @@ class TaskListItem extends React.Component {
     } else {
       return (
         <div className="list-div">
+          <h2>{this.props.title}</h2>
           <ul>
             {this.props.results.map((el, key) => (
               <li key={key} className="list-el">
