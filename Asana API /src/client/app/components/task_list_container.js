@@ -3,8 +3,10 @@ import TaskList from './task_list.jsx';
 import {getTasks} from  '../actions/task_actions';
 
 const mapStateToProps = state => {
+  // console.log(state)
   return {
-
+    errors: state.errors.errors,
+    tasks: state.tasks.data
 }};
 
 const mapDispatchToProps = dispatch => ({

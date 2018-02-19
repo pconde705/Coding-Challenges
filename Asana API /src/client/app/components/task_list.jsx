@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskListItem from './task_list_item.jsx';
 
 class TaskList extends React.Component {
 
@@ -33,6 +34,7 @@ class TaskList extends React.Component {
           onChange={this.handleInput('project_id')}
           placeholder="e.g. 931581952334457"></input>
         <button className="form-button" onClick={this.handleSubmit}>Get Tasks</button>
+        <TaskListItem results={this.props.tasks} project={this.state["project_id"]}/>
       </div>
     )
   }
