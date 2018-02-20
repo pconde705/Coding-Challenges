@@ -8,6 +8,7 @@ class TaskListItem extends React.Component {
     this.hideList = this.hideList.bind(this)
   }
 
+  // Adds class of display: none to hide specific element
   hideList(e) {
     e.preventDefault();
     e.currentTarget.parentNode.style = "display: none";

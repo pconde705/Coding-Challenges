@@ -14,6 +14,8 @@ const receiveErrors = errors => ({
   errors
 });
 
+// In order to get title of project we dispatch a GET request that
+// includes the project id and the personal access token
 export const getProject = (project_id, asana_token) => dispatch => (
   axios.get(`${PROJECTS}/${project_id}?access_token=${asana_token}`)
   .then(
