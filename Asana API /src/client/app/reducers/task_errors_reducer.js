@@ -1,6 +1,6 @@
 import {RECEIVE_ERRORS} from '../actions/task_actions';
 
-const errorsReducer = (state = {}, action) => {
+const taskErrorsReducer = (state = {}, action) => {
   Object.freeze(state);
 
   switch (action.type) {
@@ -11,4 +11,4 @@ const errorsReducer = (state = {}, action) => {
   }
 }
 
-export default errorsReducer;
+export default taskErrorsReducer;

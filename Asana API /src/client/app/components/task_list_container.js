@@ -5,7 +5,8 @@ import {getProject} from  '../actions/project_actions';
 
 const mapStateToProps = state => {
   return {
-    errors: state.errors.errors,
+    projectErrors: state.errors.project.errors,
+    taskErrors: state.errors.task.errors,
     tasks: state.tasks.data,
     project: state.project
 }};

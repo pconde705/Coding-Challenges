@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import errorsReducer from './error_reducer';
+import errorsReducer from './errors_reducer';
 import tasksReducer from './tasks_reducer';
 import projectReducer from './project_reducer';
 

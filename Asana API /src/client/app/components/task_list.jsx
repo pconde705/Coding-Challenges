@@ -9,6 +9,7 @@ class TaskList extends React.Component {
     this.state = {project_id: "", asana_token: ""}
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   handleInput(type) {
@@ -23,8 +24,21 @@ class TaskList extends React.Component {
     this.props.getTasks(this.state["project_id"], this.state["asana_token"]);
   }
 
+  renderErrors() {
+    if (this.props.projectErrors == undefined) {
+      return ("")
+    } else {
+      return (
+        <div>
+          <h2>{this.props.projectErrors[0]['message']}</h2>
+        </div>
+      )
+    }
+  }
+
 
   render () {
+    console.log("jsx", this.props.projectErrors);
     return (
       <div className="form-div">
         <p className="form-p">Type in your personal access token:</p>
@@ -37,6 +51,8 @@ class TaskList extends React.Component {
           placeholder="e.g. 931581952334457"></input>
         <button className="form-button" onClick={this.handleSubmit}>Get Tasks</button>
         <TaskListItem results={this.props.tasks} project={this.state["project_id"]} title={this.props.project}/>
+        <br />
+        {this.renderErrors()}
       </div>
     )
   }
