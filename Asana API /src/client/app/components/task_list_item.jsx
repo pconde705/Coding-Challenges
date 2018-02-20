@@ -17,7 +17,6 @@ class TaskListItem extends React.Component {
     if (this.props.results == undefined || this.props.title == {}) {
       return ("")
     } else {
-      console.log(this.props);
       return (
         <div className="list-div">
           <p className="list-title">{this.props.title}</p>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, PROJECTS} from '../api/api';
+import {PROJECTS} from '../api/api';
 
 export const RECEIVE_TASKS = "RECEIVE_TASKS";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";

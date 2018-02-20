@@ -38,7 +38,6 @@ class TaskList extends React.Component {
 
 
   render () {
-    console.log("jsx", this.props.projectErrors);
     return (
       <div className="form-div">
         <p className="form-p">Type in your personal access token:</p>
