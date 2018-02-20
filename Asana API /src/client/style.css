@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url(media/asana_color_trio.jpg);
+  background-image: url(media/asana_color_column.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -53,8 +53,9 @@ body {
 }
 
 .list-el {
+  background-color: white;
   list-style-type: none;
-  border: 1px solid black;
+  border: 1px dotted black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -64,11 +65,46 @@ body {
 }
 
 .list-el a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 22px;
+  font-family: 'Raleway', sans-serif;
+  color: black;
+  font-weight: 900;
 }
 
+.list-el a:hover {
+  text-decoration: underline;
+  color: white;
+}
 
-.list-el-hidden {
-  display: none;
+.list-el:hover {
+  background-color: lightgray;
+}
+
+.list-title {
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 30px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.list-button {
+  margin-top: 20px;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: lightgoldenrodyellow;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid green;
+}
+
+.list-button:hover {
+  background-color: white;
 }

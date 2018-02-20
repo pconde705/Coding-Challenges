@@ -14,12 +14,13 @@ class TaskListItem extends React.Component {
   }
 
   render () {
-    if (this.props.results == undefined) {
+    if (this.props.results == undefined || this.props.title == {}) {
       return ("")
     } else {
+      console.log(this.props);
       return (
         <div className="list-div">
-          <h2>{this.props.title}</h2>
+          <p className="list-title">{this.props.title}</p>
           <ul>
             {this.props.results.map((el, key) => (
               <li key={key} className="list-el">
