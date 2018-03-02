@@ -15,6 +15,8 @@ const receiveErrors = errors => ({
   errors
 });
 
+// Every time we successfully receive a project, and subsquently render
+// we remove the visible error messages if there were any 
 const clearErrors = () => ({
   type: CLEAR_ERRORS,
 });

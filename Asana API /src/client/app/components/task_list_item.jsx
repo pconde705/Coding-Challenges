@@ -15,6 +15,7 @@ class TaskListItem extends React.Component {
   }
 
   render () {
+    // Conditional statement to keep tasks from rendering before data has been fetched
     if (this.props.results == undefined || this.props.title.length == undefined) {
       return ("")
     } else {
