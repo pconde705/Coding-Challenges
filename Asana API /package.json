@@ -6,7 +6,8 @@
   "license": "MIT",
   "devDependencies": {
     "redux-logger": "^3.0.6",
-    "webpack": "^3.11.0"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10"
   },
   "dependencies": {
     "axios": "^0.17.1",

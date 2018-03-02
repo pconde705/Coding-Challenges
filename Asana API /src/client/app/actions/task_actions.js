@@ -2,7 +2,7 @@ import axios from 'axios';
 import {PROJECTS} from '../api/api';
 
 export const RECEIVE_TASKS = "RECEIVE_TASKS";
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
 
 const receiveTasks = tasks => ({
   type: RECEIVE_TASKS,
@@ -10,7 +10,7 @@ const receiveTasks = tasks => ({
 });
 
 const receiveErrors = errors => ({
-  type: RECEIVE_ERRORS,
+  type: RECEIVE_TASK_ERRORS,
   errors
 });
 
