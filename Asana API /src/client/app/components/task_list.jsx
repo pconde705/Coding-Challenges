@@ -36,7 +36,6 @@ class TaskList extends React.Component {
     }
   }
 
-
   render () {
     return (
       <div className="form-div">

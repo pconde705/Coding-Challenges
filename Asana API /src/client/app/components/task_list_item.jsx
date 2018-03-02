@@ -15,7 +15,7 @@ class TaskListItem extends React.Component {
   }
 
   render () {
-    if (this.props.results == undefined || this.props.title == {}) {
+    if (this.props.results == undefined || this.props.title.length == undefined) {
       return ("")
     } else {
       return (
