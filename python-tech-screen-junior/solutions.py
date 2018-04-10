@@ -47,7 +47,7 @@ def dec_to_base_x(base, num):
     result = ""
     while num != 0 :
         result = alphabet[int(num % base)] + result
-        num = num / base
+        num /= base
     for letter in result:
         if letter != "0":
             break
