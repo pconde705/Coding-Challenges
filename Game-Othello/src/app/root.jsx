@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './app';
+import App from './app.jsx';
 import { HashRouter } from 'react-router-dom';
 
 const Root = () => (
@@ -7,3 +7,5 @@ const Root = () => (
     <App />
   </HashRouter>
 )
+
+export default Root;
