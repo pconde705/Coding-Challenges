@@ -4,21 +4,19 @@ class Board extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {pos: ""}
+    this.state = {color: "white"}
     this.colorChange = this.colorChange.bind(this)
   }
 
   colorChange(e) {
     e.preventDefault();
-    this.setState({pos: "blue"})
-    console.log(e.currentTarget);
-    e.currentTarget.style["backgroundColor"] == "black" ? e.currentTarget.style = "background-color: white" : e.currentTarget.style = "background-color: black";
+    this.state["color"] == "black" ? this.setState({color: "white"}) : this.setState({color: "black"})
+    this.state["color"] == "black" ? e.currentTarget.style = "background-color: white" : e.currentTarget.style = "background-color: black";
   }
 
   render () {
     return (
-      <div className="overall-div">
-        <div className="board">
+        <div>
           <table>
             <tbody>
               <tr>
@@ -360,7 +358,6 @@ class Board extends React.Component {
             </tbody>
           </table>
         </div>
-      </div>
     )
   }
 }

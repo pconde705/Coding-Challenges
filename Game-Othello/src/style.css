@@ -11,6 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: brown;
+  height: -webkit-fill-available;
 }
 
 .square {
