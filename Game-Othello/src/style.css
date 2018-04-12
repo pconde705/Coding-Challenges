@@ -1,0 +1,21 @@
+body {
+  height: 100%;
+}
+
+.overall-div {
+  background-color: black;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: brown;
+}
+
+.square {
+  border: 1px solid black;
+  background-color: green;
+  width: 60px;
+  height: 60px;
+}
