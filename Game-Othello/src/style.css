@@ -18,4 +18,18 @@ body {
   background-color: green;
   width: 60px;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tile-button {
+  background: none;
+  border: none;
+  border-radius: 30px;
+  height: 50px;
+  background-color: black;
+  width: 50px;
+  box-shadow: 3px 3px 12px 0px #565454;
+  cursor: pointer;
 }
