@@ -1,4 +1,5 @@
 import React from 'react'
+import Board from './board.jsx'
 
 class BoardGame extends React.Component {
 
@@ -19,12 +20,7 @@ class BoardGame extends React.Component {
     return (
       <div className="overall-div">
         <div className="board">
-            <div className="square">
-              <button className="tile-button" onClick={this.colorChange}></button>
-            </div>
-            <div className="square">
-              <button className="tile-button" onClick={this.colorChange}></button>
-            </div>
+          <Board />
         </div>
       </div>
     )

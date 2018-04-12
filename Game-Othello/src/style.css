@@ -33,3 +33,22 @@ body {
   box-shadow: 3px 3px 12px 0px #565454;
   cursor: pointer;
 }
+
+.tile-button-white {
+  background: none;
+  border: none;
+  border-radius: 30px;
+  height: 50px;
+  background-color: white;
+  width: 50px;
+  box-shadow: 3px 3px 12px 0px #565454;
+  cursor: pointer;
+}
+.no-tile {
+  background: none;
+  border: none;
+  border-radius: 30px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
