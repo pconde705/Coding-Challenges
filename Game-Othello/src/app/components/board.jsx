@@ -14,6 +14,12 @@ class Board extends React.Component {
     this.state["color"] == "black" ? e.currentTarget.style = "background-color: white" : e.currentTarget.style = "background-color: black";
   }
 
+
+componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(prevProps);
+    console.log(prevState);
+  }
+
   render () {
     let rows = [];
     for (var i = 0; i < 8; i++) {
@@ -37,6 +43,11 @@ class Board extends React.Component {
       }
       rows.push(<tr key={i} id={rowID}>{cell}</tr>)
     }
+    rows.forEach(row => {
+      row.props["children"].forEach(cell => {
+        cell.props["children"].props["children"].props["className"];
+      })
+    })
 
     return (
       <div>
