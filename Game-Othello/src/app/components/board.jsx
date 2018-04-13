@@ -11,13 +11,20 @@ class Board extends React.Component {
   colorChange(e) {
     e.preventDefault();
     this.state["color"] == "black" ? this.setState({color: "white"}) : this.setState({color: "black"})
-    this.state["color"] == "black" ? e.currentTarget.style = "background-color: white" : e.currentTarget.style = "background-color: black";
-  }
 
-
-componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(prevProps);
-    console.log(prevState);
+    if (this.state["color"] == "black") {
+      e.currentTarget.classList.add("tile-button-white")
+      e.currentTarget.classList.remove("no-tile")
+      let whiteCounter = this.state["whitePoints"]
+      whiteCounter += 1
+      this.setState({whitePoints: whiteCounter})
+    } else {
+      e.currentTarget.classList.add("tile-button")
+      e.currentTarget.classList.remove("no-tile")
+      let blackCounter = this.state["blackPoints"]
+      blackCounter += 1
+      this.setState({blackPoints: blackCounter})
+    }
   }
 
   render () {
@@ -43,14 +50,13 @@ componentDidUpdate(prevProps, prevState, snapshot) {
       }
       rows.push(<tr key={i} id={rowID}>{cell}</tr>)
     }
-    rows.forEach(row => {
-      row.props["children"].forEach(cell => {
-        cell.props["children"].props["children"].props["className"];
-      })
-    })
 
     return (
       <div>
+        <div className="points-div">
+          <p>BLACK : {this.state["blackPoints"]}</p>
+          <p>WHITE : {this.state["whitePoints"]}</p>
+        </div>
         <table>
           <tbody>
             {rows}

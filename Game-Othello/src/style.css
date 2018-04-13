@@ -10,8 +10,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: brown;
   height: -webkit-fill-available;
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  letter-spacing: 2px;
 }
 
 .square {
@@ -45,6 +49,7 @@ body {
   box-shadow: 3px 3px 12px 0px #565454;
   cursor: pointer;
 }
+
 .no-tile {
   background: none;
   border: none;
@@ -52,4 +57,13 @@ body {
   height: 50px;
   width: 50px;
   cursor: pointer;
+}
+
+.points-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: sans-serif;
+  font-size: 16px;
+  
 }
