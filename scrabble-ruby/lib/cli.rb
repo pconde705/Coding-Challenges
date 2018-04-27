@@ -3,16 +3,19 @@ require_relative "data"
 class CLI
   def run
     print "Your input is: "
-    letters = gets.chomp
+    input = gets.chomp
 
-    if check_length(letters) && check_validity_of_string(letters)
-
-      puts Data.point_system
+    if check_length(input) && check_validity_of_string(input)
+      input_letter_count = Hash.new(0)
+      input.chars.each do |letter|
+        input_letter_count[letter] += 1
+      end
+      
       puts "Congrats"
     end
   end
 
-  def check_length(letters)
+  def check_length(input)
     # O(1) time insertion instead of include? which is linear
     alphabet = {"a" => true, "b" => true, "c" => true, "d" => true, "e" => true,
                 "f" => true, "g" => true, "h" => true, "i" => true, "j" => true,
@@ -23,7 +26,7 @@ class CLI
               }
     valid = true
 
-    letters.chars.each do |letter|
+    input.chars.each do |letter|
       if alphabet[letter.downcase].nil?
         valid = false
         break
@@ -40,10 +43,10 @@ class CLI
     true
   end
 
-  def check_validity_of_string(letters)
-    if letters.length != 7
+  def check_validity_of_string(input)
+    if input.length != 7
       puts ""
-      puts "Your input must be exactly 7 characters. #{letters} is #{letters.length} characters"
+      puts "Your input must be exactly 7 characters. #{input} is #{input.length} characters"
       puts ""
       return run
     end

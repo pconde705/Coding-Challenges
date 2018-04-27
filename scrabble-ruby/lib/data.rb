@@ -15,4 +15,20 @@ class Data
     points
   end
 
+  def self.dictionary_letter_count
+    word_count = {}
+    words = self.read_dictionary
+    words.each do |word|
+      letter_count_hash = Hash.new(0)
+      word.chars.each do |letter|
+        letter_count_hash[letter] += 1
+      end
+      word_count[word] = letter_count_hash
+    end
+    word_count
+  end
+
 end
+
+
+Data.dictionary_letter_count
