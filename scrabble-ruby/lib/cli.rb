@@ -10,7 +10,33 @@ class CLI
       input.chars.each do |letter|
         input_letter_count[letter] += 1
       end
-      
+      results = []
+
+      Data.dictionary_letter_count.each do |word, letter_count|
+        next if word.length > input.length # uncessary if you get rid of >7 character words
+        skip = false
+        word.chars.each do |letter|
+          skip = true if input_letter_count[letter] == 0
+        end
+        next if skip
+        input_letter_count.each do |letter, count|
+          if letter_count[letter] <= count
+            if results[0].nil?
+              results << word
+            elsif results[0].length > word.length
+              ""
+            elsif results[0].length < word.length
+              puts "#{letter} #{letter_count[letter]}"
+              puts "#{input_letter_count[letter]}: #{count}"
+              results = []
+              results << word
+            end
+          end
+        end
+      end
+      print results
+      puts ""
+      puts input_letter_count
       puts "Congrats"
     end
   end

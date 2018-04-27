@@ -14,7 +14,7 @@ class Data
     end
     points
   end
-
+# You don't need any words in the dictionary above seven letters.
   def self.dictionary_letter_count
     word_count = {}
     words = self.read_dictionary
@@ -29,6 +29,3 @@ class Data
   end
 
 end
-
-
-Data.dictionary_letter_count
