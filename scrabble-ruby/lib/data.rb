@@ -1,6 +1,10 @@
 class Data
   def self.read_dictionary
-    words = File.readlines("./data/dictionary.txt").map(&:chomp)
+    words = []
+    File.readlines("./data/dictionary.txt").map do |word|
+      words << word[0..-2] unless word.length > 8
+    end
+    print words
   end
 
   def self.point_system
@@ -29,3 +33,5 @@ class Data
   end
 
 end
+
+puts Data.read_dictionary

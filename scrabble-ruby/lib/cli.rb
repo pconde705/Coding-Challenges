@@ -13,7 +13,6 @@ class CLI
       results = []
 
       Data.dictionary_letter_count.each do |word, letter_count|
-        next if word.length > 7 # uncessary if you get rid of >7 character words
         skip = false
         word.chars.each do |letter|
           if input_letter_count[letter] == 0
@@ -58,12 +57,7 @@ class CLI
 
         score = 0
       end
-      print results
-      puts ""
-      puts Data.point_system
-      print final
-      puts ""
-      puts max_score
+      puts final
     end
   end
 
