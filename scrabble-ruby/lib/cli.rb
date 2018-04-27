@@ -4,9 +4,12 @@ class CLI
   def run
     print "Your input is: "
     letters = gets.chomp
-    check_length(letters)
-    check_validity_of_string(letters)
-    puts "Congrats"
+
+    if check_length(letters) && check_validity_of_string(letters)
+
+      puts Data.point_system
+      puts "Congrats"
+    end
   end
 
   def check_length(letters)
@@ -19,21 +22,33 @@ class CLI
                 "z" => true
               }
     valid = true
+
     letters.chars.each do |letter|
       if alphabet[letter.downcase].nil?
         valid = false
         break
       end
     end
+
     if !valid
+      puts ""
       puts "Your input may only contain letters! A-Z or a-z"
+      puts ""
+      return run
     end
+
+    true
   end
 
   def check_validity_of_string(letters)
     if letters.length != 7
+      puts ""
       puts "Your input must be exactly 7 characters. #{letters} is #{letters.length} characters"
+      puts ""
+      return run
     end
+
+    true
   end
 
 

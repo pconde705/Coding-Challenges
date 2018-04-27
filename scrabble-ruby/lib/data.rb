@@ -1,9 +1,9 @@
-class DATA
-  def read_dictionary
+class Data
+  def self.read_dictionary
     words = File.readlines("./data/dictionary.txt").map(&:chomp)
   end
 
-  def point_system
+  def self.point_system
     points = {}
     File.readlines("./data/points.txt").map do |line|
       if line[-3] == "1"
@@ -14,4 +14,5 @@ class DATA
     end
     points
   end
+
 end
