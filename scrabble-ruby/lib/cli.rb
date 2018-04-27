@@ -21,14 +21,16 @@ class CLI
           end
         end
         next if skip
-        push = true
+
+        skip = false
         input_letter_count.each do |letter, count|
           if letter_count[letter] > count
-            push = false
+            skip = true
             break
           end
         end
-        next if push == false
+        next if skip
+
         if results[0].nil?
           results << word
         elsif results[0].length > word.length
@@ -40,6 +42,7 @@ class CLI
           results << word
         end
       end
+
       final = []
       max_score = 0
       score = 0
