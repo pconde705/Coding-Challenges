@@ -13,31 +13,57 @@ class CLI
       results = []
 
       Data.dictionary_letter_count.each do |word, letter_count|
-        next if word.length > input.length # uncessary if you get rid of >7 character words
+        next if word.length > 7 # uncessary if you get rid of >7 character words
         skip = false
         word.chars.each do |letter|
-          skip = true if input_letter_count[letter] == 0
-        end
-        next if skip
-        input_letter_count.each do |letter, count|
-          if letter_count[letter] <= count
-            if results[0].nil?
-              results << word
-            elsif results[0].length > word.length
-              ""
-            elsif results[0].length < word.length
-              puts "#{letter} #{letter_count[letter]}"
-              puts "#{input_letter_count[letter]}: #{count}"
-              results = []
-              results << word
-            end
+          if input_letter_count[letter] == 0
+            skip = true
+            break
           end
         end
+        next if skip
+        push = true
+        input_letter_count.each do |letter, count|
+          if letter_count[letter] > count
+            push = false
+            break
+          end
+        end
+        next if push == false
+        if results[0].nil?
+          results << word
+        elsif results[0].length > word.length
+          next
+        elsif results[0].length < word.length
+          results = []
+          results << word
+        else
+          results << word
+        end
+      end
+      final = []
+      max_score = 0
+      score = 0
+      results.each do |word|
+        word.chars.each do |letter|
+          score += Data.point_system[letter.upcase]
+        end
+        if score > max_score
+          max_score = score
+          final = []
+          final << word
+        elsif score == max_score
+          final << word
+        end
+
+        score = 0
       end
       print results
       puts ""
-      puts input_letter_count
-      puts "Congrats"
+      puts Data.point_system
+      print final
+      puts ""
+      puts max_score
     end
   end
 
