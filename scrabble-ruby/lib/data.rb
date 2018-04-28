@@ -1,9 +1,9 @@
 class Data
-  def self.read_dictionary
+  # You don't need any words in the dictionary above seven letters.
+  def self.dictionary_words
     words = []
     File.readlines("./data/dictionary.txt").map do |word|
       words << word[0..-2] unless word.length > 8
-      # You don't need any words in the dictionary above seven letters.
     end
     words
   end
@@ -17,18 +17,16 @@ class Data
         points[line[0]] = line[-2].to_i
       end
     end
+    points["_"] = 0
     points
   end
 
   def self.dictionary_letter_count
     word_count = {}
-    words = self.read_dictionary
-    words.each do |word|
-      letter_count_hash = Hash.new(0)
-      word.chars.each do |letter|
-        letter_count_hash[letter] += 1
-      end
-      word_count[word] = letter_count_hash
+    self.dictionary_words.each do |word|
+      word_letter_count = Hash.new(0)
+      word.chars.each { |letter| word_letter_count[letter] += 1 }
+      word_count[word] = word_letter_count
     end
     word_count
   end

@@ -5,105 +5,49 @@ class CLI
     print "Your input is: "
     input = gets.chomp
 
-    results = []
-
-    if check_length(input) && check_validity_of_string(input)
+    if check_validity_of_string(input) && check_length(input)
       input_letter_count = Hash.new(0)
-      input.chars.each do |letter|
-        input_letter_count[letter.downcase] += 1
+      input.chars.each { |letter| input_letter_count[letter.downcase] += 1 }
+
+      if input_letter_count["_"] >= 1
+
+      else
+        matches = check_dictionary(input_letter_count)
       end
 
-      Data.dictionary_letter_count.each do |word, letter_count|
-        next if check_letters(word, input_letter_count)
-        next if check_letter_count(word, input_letter_count, letter_count)
-
-        if results[0].nil?
-          results << word
-        elsif results[0].length > word.length
-          next
-        elsif results[0].length < word.length
-          results = []
-          results << word
-        else
-          results << word
-        end
-      end
+      score = calculate_score(matches)
+      score[0...-1].each { |result| puts "#{result} - #{score[-1]}" }
     end
 
-    final = calculate_score(results)
-    final[0...-1].each do |result|
-      puts "#{result} - #{final[-1]}"
-    end
-  end
-
-  def check_letters(word, input_letter_count)
-    skip = false
-    word.chars.each do |letter|
-      if input_letter_count[letter] == 0
-        skip = true
-        break
-      end
-    end
-    skip
-  end
-
-  def check_letter_count(word, input_letter_count, letter_count)
-    skip = false
-    input_letter_count.each do |letter, count|
-      if letter_count[letter] > count
-        skip = true
-        break
-      end
-    end
-    skip
-  end
-
-  def calculate_score(results)
-    final = []
-    max_score = 0
-    score = 0
-    results.each do |word|
-      word.chars.each do |letter|
-        score += Data.point_system[letter.upcase]
-      end
-      if score > max_score
-        max_score = score
-        final = []
-        final << word.upcase
-      elsif score == max_score
-        final << word.upcase
-      end
-
-      score = 0
-    end
-    final << max_score
+    return # short hand to stop the game
   end
 
   def check_validity_of_string(input)
     # O(1) time insertion instead of include? which is linear
-    alphabet = {"a" => true, "b" => true, "c" => true, "d" => true, "e" => true,
-                "f" => true, "g" => true, "h" => true, "i" => true, "j" => true,
-                "k" => true, "l" => true, "m" => true, "n" => true, "o" => true,
-                "p" => true, "q" => true, "r" => true, "s" => true, "t" => true,
-                "u" => true, "v" => true, "w" => true, "x" => true, "y" => true,
-                "z" => true, "_" => true
-              }
-    valid = true
+    alphabet = Hash.new(0)
+    ("a".."z").each { |letter| alphabet[letter] = 0 }
+    alphabet["_"] = 0
 
+    valid = true
     input.chars.each do |letter|
-      if alphabet[letter.downcase].nil?
+      alphabet["_"] += 1 if letter == "_"
+      if alphabet[letter.downcase].nil? || alphabet["_"] > 2
         valid = false
         break
       end
     end
-
+    if alphabet["_"] > 2
+      puts ""
+      puts "You may have a maximum of 2 blank tiles"
+      puts ""
+      return run
+    end
     if !valid
       puts ""
       puts "Your input may only contain letters! A-Z or a-z"
       puts ""
       return run
     end
-
     true
   end
 
@@ -114,10 +58,67 @@ class CLI
       puts ""
       return run
     end
-
     true
   end
 
+  def check_dictionary(input_letter_count)
+    result = [""]
+    Data.dictionary_letter_count.each do |word, word_letter_count|
+      next if word.length < result[0].length
+      next if check_letter_count(input_letter_count, word_letter_count)
 
+      if result[0].length < word.length
+        result = []
+        result << word
+      else
+        result << word
+      end
+    end
+    result
+  end
+
+  def check_letter_count(input_letter_count, word_letter_count)
+    skip = false
+
+    word_letter_count.each do |letter, count|
+      if input_letter_count[letter] == 0 || count > input_letter_count[letter]
+        skip = true
+        break
+      end
+    end
+
+    if skip
+      return skip
+    else
+      input_letter_count.each do |letter, count|
+        if word_letter_count[letter] > count
+          skip = true
+          break
+        end
+      end
+    end
+
+    skip
+  end
+
+  def calculate_score(matches)
+    point_system = Data.point_system
+    final_result = []
+    max_score = 0
+
+    matches.each do |word|
+      score = 0
+      word.chars.each { |letter| score += point_system[letter.upcase] }
+      if score > max_score
+        max_score = score
+        final_result = []
+        final_result << word.upcase
+      elsif score == max_score
+        final_result << word.upcase
+      end
+    end
+    final_result << max_score
+    final_result
+  end
 
 end
