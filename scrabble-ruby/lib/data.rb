@@ -3,6 +3,7 @@ class Data
     words = []
     File.readlines("./data/dictionary.txt").map do |word|
       words << word[0..-2] unless word.length > 8
+      # You don't need any words in the dictionary above seven letters.
     end
     words
   end
@@ -18,7 +19,7 @@ class Data
     end
     points
   end
-# You don't need any words in the dictionary above seven letters.
+
   def self.dictionary_letter_count
     word_count = {}
     words = self.read_dictionary
