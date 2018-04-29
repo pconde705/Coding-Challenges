@@ -1,4 +1,5 @@
 require_relative "data"
+require_relative "underscore"
 
 class CLI
   def run
@@ -10,7 +11,8 @@ class CLI
       input.chars.each { |letter| input_letter_count[letter.downcase] += 1 }
 
       if input_letter_count["_"] >= 1
-
+        matches = Underscore.underscore_to_letter(input_letter_count)
+        print matches
       else
         matches = check_dictionary(input_letter_count)
       end
