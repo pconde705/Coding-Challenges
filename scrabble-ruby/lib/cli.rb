@@ -37,7 +37,7 @@ class CLI
         break
       end
     end
-    if alphabet["_"] > 2
+    if alphabet["_"] > 3
       puts ""
       puts "You may have a maximum of 2 blank tiles"
       puts ""
