@@ -17,7 +17,7 @@ class CLI
         score = calculate_score(matches)
       end
 
-      score[0...-1].each { |result| puts "#{result} - #{score[-1]}" }
+      score[0...-1].sort.each { |result| puts "#{result} - #{score[-1]}" }
     end
 
     return # short hand to stop the game
