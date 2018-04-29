@@ -23,38 +23,19 @@ class Underscore
       i += 1
     end
 
-    matches_letter_removed = []
-    matches.each do |word|
-      word_letter_count = Hash.new(0)
-      word.chars.each { |letter| word_letter_count[letter.downcase] += 1 }
-
-      word_letter_count.each do |letter, count|
-        word_letter_count[letter] -= 1 until input_letter_count[letter] == word_letter_count[letter]
-      end
-
-      word_letter_removed = []
-      string = ""
-
-      word_letter_count.each { |letter, count| string += (letter * count) }
-      matches_letter_removed << string
-    end
+    matches_letter_removed = self.remove_letters(matches, input_letter_count)
 
     self.calculate_score(matches, matches_letter_removed)
   end
 
   def self.check_dictionary(input_letter_count, matches)
-    # puts ""
-    # print matches
     Data.dictionary_letter_count.each do |word, word_letter_count|
       next if word.length < matches[0].length
       next if self.check_letter_count(input_letter_count, word_letter_count)
 
       if matches[0].length < word.length
-        # puts matches[0]
-        # puts word.length
         matches = []
         matches << word
-        # print matches
       else
         matches << word
       end
@@ -86,24 +67,42 @@ class Underscore
     skip
   end
 
-  def self.calculate_score(matches)
+  def self.remove_letters(matches, input_letter_count)
+    matches_letter_removed = []
+    matches.each do |word|
+      word_letter_count = Hash.new(0)
+      word.chars.each { |letter| word_letter_count[letter.downcase] += 1 }
+
+      word_letter_count.each do |letter, count|
+        word_letter_count[letter] -= 1 until input_letter_count[letter] == word_letter_count[letter]
+      end
+
+      word_letter_removed = []
+      string = ""
+
+      word_letter_count.each { |letter, count| string += (letter * count) }
+      matches_letter_removed << string
+    end
+    matches_letter_removed
+  end
+
+  def self.calculate_score(matches, matches_letter_removed)
     point_system = Data.point_system
     final_result = []
     max_score = 0
 
-    matches.each do |word|
+    matches_letter_removed.each_with_index do |word, index|
       score = 0
       word.chars.each { |letter| score += point_system[letter.upcase] }
       if score > max_score
         max_score = score
         final_result = []
-        final_result << word.upcase
+        final_result << matches[index].upcase
       elsif score == max_score
-        final_result << word.upcase
+        final_result << matches[index].upcase
       end
     end
     final_result << max_score
     final_result
   end
-
 end

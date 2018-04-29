@@ -11,13 +11,12 @@ class CLI
       input.chars.each { |letter| input_letter_count[letter.downcase] += 1 }
 
       if input_letter_count["_"] >= 1
-        matches = Underscore.underscore_to_letter(input_letter_count)
-        print matches
+        score = Underscore.underscore_to_letter(input_letter_count)
       else
         matches = check_dictionary(input_letter_count)
+        score = calculate_score(matches)
       end
 
-      score = calculate_score(matches)
       score[0...-1].each { |result| puts "#{result} - #{score[-1]}" }
     end
 
@@ -27,13 +26,13 @@ class CLI
   def check_validity_of_string(input)
     # O(1) time insertion instead of include? which is linear
     alphabet = Hash.new(0)
-    ("a".."z").each { |letter| alphabet[letter] = 0 }
-    alphabet["_"] = 0
+    ("a".."z").each { |letter| alphabet[letter] = 1 }
+    alphabet["_"] = 1
 
     valid = true
     input.chars.each do |letter|
       alphabet["_"] += 1 if letter == "_"
-      if alphabet[letter.downcase].nil? || alphabet["_"] > 2
+      if alphabet[letter.downcase] == 0 || alphabet["_"] > 3
         valid = false
         break
       end
