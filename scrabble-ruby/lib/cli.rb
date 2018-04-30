@@ -67,15 +67,8 @@ class CLI
     result = [""]
 
     words.each do |word, word_letter_count|
-      next if word.length < result[0].length
       next if check_letter_count(input_letter_count, word_letter_count)
-
-      if result[0].length < word.length
-        result = []
-        result << word
-      else
-        result << word
-      end
+      result << word
     end
     result
   end

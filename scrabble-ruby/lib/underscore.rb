@@ -5,60 +5,58 @@ class Underscore
   def self.underscore_to_letter(input_letter_count)
     alphabet = ("a".."z").to_a
     input_letter_count["_"] == 2 ? alphabet_two = ("a".."z").to_a : alphabet_two = []
-    matches = [""]
     input_letter_count.delete("_")
 
     sorted_words = Data.dictionary_words_sorted
-    possible_words = []
-    input_letter_count.each_key { |letter| possible_words.concat(sorted_words[letter]) }
-    words = Data.selected_words(possible_words)
+    words = Data.dictionary_letter_count(input_letter_count)
 
+    matches = self.blank_tiles_logic(input_letter_count, alphabet, alphabet_two, words, sorted_words)
+    matches.uniq!
+
+    matches_letter_removed = self.remove_letters(matches, input_letter_count)
+
+    self.calculate_score(matches, matches_letter_removed)
+  end
+
+  def self.blank_tiles_logic(input_letter_count, alphabet, alphabet_two, words, sorted_words)
+    matches = [""]
     i = 0
     while i < alphabet.length
       input_letter_count[alphabet[i]] += 1
-      unless input_letter_count[alphabet[i]] > 1
+      if input_letter_count[alphabet[i]] > 1
+        temp_words = words
+      else
         new_words = Data.selected_words(sorted_words[alphabet[i]])
         temp_words = words.merge(new_words)
-      else
-        temp_words = words
       end
       matches = self.check_dictionary(input_letter_count, matches, temp_words) if alphabet_two.empty?
+
       j = 0
       while j < alphabet_two.length
         input_letter_count[alphabet_two[j]] += 1
-        unless input_letter_count[alphabet[j]] > 1
+        if input_letter_count[alphabet[j]] > 1
+          temp_words = words
+        else
           new_words = Data.selected_words(sorted_words[alphabet[j]])
           temp_words = words.merge(new_words)
-        else
-          temp_words = words
         end
         matches = self.check_dictionary(input_letter_count, matches, temp_words)
         input_letter_count[alphabet_two[j]] -= 1
         temp_words = {}
         j += 1
       end
+
       input_letter_count[alphabet[i]] -= 1
       temp_words = {}
       i += 1
     end
-    matches.uniq!
-    matches_letter_removed = self.remove_letters(matches, input_letter_count)
-
-    self.calculate_score(matches, matches_letter_removed)
+    matches
   end
 
   def self.check_dictionary(input_letter_count, matches, words)
     words.each do |word, word_letter_count|
-      next if word.length < matches[0].length
       next if self.check_letter_count(input_letter_count, word_letter_count)
-      if matches[0].length < word.length
-        matches = []
-        matches << word
-        words.delete(word)
-      else
-        matches << word
-        words.delete(word)
-      end
+      matches << word
     end
     matches
   end
@@ -89,17 +87,17 @@ class Underscore
 
   def self.remove_letters(matches, input_letter_count)
     matches_letter_removed = []
-    matches.each do |word|
-      word_letter_count = Hash.new(0)
-      word.chars.each { |letter| word_letter_count[letter.downcase] += 1 }
-      word_letter_count.each do |letter, count|
+    words = Data.selected_words(matches)
+
+    words.each do |word, word_letter_count|
+
+      word_letter_count.each_key do |letter|
         if word_letter_count[letter] > input_letter_count[letter]
           word_letter_count[letter] -= 1 until input_letter_count[letter] == word_letter_count[letter]
         end
       end
-      word_letter_removed = []
-      string = ""
 
+      string = ""
       word_letter_count.each { |letter, count| string += (letter * count) }
       matches_letter_removed << string
     end
