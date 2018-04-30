@@ -1,4 +1,5 @@
 require_relative "data"
+require_relative "cli"
 
 class Underscore
 
@@ -55,34 +56,10 @@ class Underscore
 
   def self.check_dictionary(input_letter_count, matches, words)
     words.each do |word, word_letter_count|
-      next if self.check_letter_count(input_letter_count, word_letter_count)
+      next if CLI.check_letter_count(input_letter_count, word_letter_count)
       matches << word
     end
     matches
-  end
-
-  def self.check_letter_count(input_letter_count, word_letter_count)
-    skip = false
-
-    word_letter_count.each do |letter, count|
-      if input_letter_count[letter] == 0 || count > input_letter_count[letter]
-        skip = true
-        break
-      end
-    end
-
-    if skip
-      return skip
-    else
-      input_letter_count.each do |letter, count|
-        if word_letter_count[letter] > count
-          skip = true
-          break
-        end
-      end
-    end
-
-    skip
   end
 
   def self.remove_letters(matches, input_letter_count)

@@ -67,13 +67,13 @@ class CLI
     result = [""]
 
     words.each do |word, word_letter_count|
-      next if check_letter_count(input_letter_count, word_letter_count)
+      next if CLI.check_letter_count(input_letter_count, word_letter_count)
       result << word
     end
     result
   end
 
-  def check_letter_count(input_letter_count, word_letter_count)
+  def self.check_letter_count(input_letter_count, word_letter_count)
     skip = false
 
     word_letter_count.each do |letter, count|
@@ -113,6 +113,7 @@ class CLI
         final_result << word.upcase
       end
     end
+    
     final_result << max_score
     final_result
   end
