@@ -20,11 +20,11 @@ class CLI
       score[0...-1].sort.each { |result| puts "#{result} - #{score[-1]}" }
     end
 
-    return # short hand to stop the game
+    return
   end
 
   def check_validity_of_string(input)
-    # O(1) time insertion instead of include? which is linear
+    # O(1) time complexity instead of O(n) (.include?) when looking up letters
     alphabet = Hash.new(0)
     ("a".."z").each { |letter| alphabet[letter] = 1 }
     alphabet["_"] = 1
@@ -63,8 +63,10 @@ class CLI
   end
 
   def check_dictionary(input_letter_count)
+    words = Data.dictionary_letter_count(input_letter_count)
     result = [""]
-    Data.dictionary_letter_count.each do |word, word_letter_count|
+
+    words.each do |word, word_letter_count|
       next if word.length < result[0].length
       next if check_letter_count(input_letter_count, word_letter_count)
 
@@ -121,5 +123,4 @@ class CLI
     final_result << max_score
     final_result
   end
-
 end

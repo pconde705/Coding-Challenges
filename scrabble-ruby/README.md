@@ -1,3 +1,7 @@
+# Patrick Conde's Scrabble
+
+Welcome to Patrick Conde's solution to the Boundless Take Home Test - Scrabble. All you have to do is run `ruby bin/scrabble` after which you will be prompted for an input. Type any seven letters of your choice including underscores if you want, then press enter and your results will appear. If you make a mistake along the way, helpful instructions will appear to inform you of what went wrong. 
+
 # Boundless Take Home Test - Scrabble
 
 ![Scrabble](./scrabble.jpg)
