@@ -41,6 +41,7 @@ class Underscore
       temp_words = {}
       i += 1
     end
+    matches.uniq!
     matches_letter_removed = self.remove_letters(matches, input_letter_count)
 
     self.calculate_score(matches, matches_letter_removed)
@@ -48,10 +49,7 @@ class Underscore
 
   def self.check_dictionary(input_letter_count, matches, words)
     words.each do |word, word_letter_count|
-      if word.length < matches[0].length
-        words.delete(word)
-        next
-      end
+      next if word.length < matches[0].length
       next if self.check_letter_count(input_letter_count, word_letter_count)
       if matches[0].length < word.length
         matches = []
